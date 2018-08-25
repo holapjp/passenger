@@ -83,6 +83,10 @@ struct Entry {
 		: suppliedByThirdParty(false)
 		{ }
 
+	// In C++98, `boost::container::small_vector` causes our default
+	// assignment operator to become `operator=(Entry &)`, which is
+	// incompatible with the Registry's usage of StringKeyTable.
+	// We fix this by writing out own assignment operator.
 	Entry &operator=(const Entry &other) {
 		if (this != &other) {
 			language = other.language;
