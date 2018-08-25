@@ -83,6 +83,19 @@ struct Entry {
 		: suppliedByThirdParty(false)
 		{ }
 
+	Entry &operator=(const Entry &other) {
+		if (this != &other) {
+			language = other.language;
+			languageDisplayName = other.languageDisplayName;
+			path = other.path;
+			processTitle = other.processTitle;
+			defaultInterpreter = other.defaultInterpreter;
+			defaultStartupFiles = other.defaultStartupFiles;
+			suppliedByThirdParty = other.suppliedByThirdParty;
+		}
+		return *this;
+	}
+
 	bool isNull() const {
 		return language.empty();
 	}
